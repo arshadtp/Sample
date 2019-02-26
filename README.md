@@ -39,7 +39,7 @@ Configure Drive AI
 ```swift
 DriveAI.shared.configure()
 ```
->>> This method will initialize sensor data capturing if the trip is already started. If trip is not started yet, then this method will start listening for auto start/ stop trip based on the flag ```enableAutoStartAndStop```. This flag is true by default. For this feature to work user should grand ```Always``` location access for the app.
+> This method will initialize sensor data capturing if the trip is already started. If trip is not started yet, then this method will start listening for auto start/ stop trip based on the flag ```enableAutoStartAndStop```. This flag is true by default. For this feature to work user should grand ```Always``` location access for the app.
 
 At this point you should be able to build the code without errors. Running the code will result in an ```assertionFailure``` with error ```Please add 'location' in required background modes```.
 
@@ -53,7 +53,7 @@ Add code below code in ```application(_ application:, didFinishLaunchingWithOpti
     	DriveAI.shared.configure()
     }
 ```
->>> This is required to get the location updates when the system launches the app due to a location update.
+> This is required to get the location updates when the system launches the app due to a location update.
 
 Builds and run the code. You are all done.
 
@@ -100,7 +100,7 @@ Call startTrip function
             }
          }
 ```
->>> The function will call server API to start trip if the current trip state is `.tripNotStarted` or `.tripEnded`. ie, will start new trip only if a the previous trip is ended. Method with invoke API for recording Sensor details if the API fails or a trip is aleady in progress.
+> The function will call server API to start trip if the current trip state is `.tripNotStarted` or `.tripEnded`. ie, will start new trip only if a the previous trip is ended. Method with invoke API for recording Sensor details if the API fails or a trip is aleady in progress.
 
 ###### Stop trip
 Call stopTrip function
@@ -113,4 +113,4 @@ Call stopTrip function
              }
          })
 ```
->>> Method will call server API to end trip. This API may take little longer to complete since it will wait for upload task which syncs all recorded sensor value to sever to finish.
+> Method will call server API to end trip. This API may take little longer to complete since it will wait for upload task which syncs all recorded sensor value to sever to finish.
