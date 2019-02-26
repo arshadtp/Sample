@@ -114,7 +114,7 @@ DriveAI.shared.stopTrip(completion: { (response, error) in
 
 ## Notifications
 
-`Drive_AI` posts four notifications via `NSNotificationCenter` :
+`Drive_AI` posts following notifications via `NSNotificationCenter` :
 * `NotificationName.hardBraking` when hard braking is detected
 * `NotificationName.crashDetected` when a vehicle crash is detected. The notification passes a `userInfo` dictionary holding the crash info. The `userInfo` can be of following types
     * Accelerometer crash: Crash was detected due to the change in Accelerometer values
