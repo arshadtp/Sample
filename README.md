@@ -4,7 +4,7 @@
 ![Pod Platform](https://img.shields.io/cocoapods/p/SVProgressHUD.svg?style=flat)
 ![Pod License](https://img.shields.io/cocoapods/l/SVProgressHUD.svg?style=flat)
 
-`DriveAI` detects the driving behaviour of a user by analyasing device sensors using our AI engine.
+`Tangerine` detects the driving behaviour of a user by analyasing device sensors using our AI engine.
 
 ## Installation
 
@@ -32,11 +32,18 @@ Import module
 ```swift
 import Tangerine
 ```
-Configure Tangerine 
+Register user and Configure Tangerine 
 ```swift
-TangerineManager.shared.configure()
+TangerineManager.registerUser(withPhone:<PHONE NUMBER>completion: { (response, error) in
+            if let error = error {
+                print("\(error.localizedDescription)")
+                
+            } else {
+                TangerineManager.shared.configure()
+            }
+        })
 ```
-> This method will initialize sensor data capturing if the trip is already started. If trip is not started yet, then this method will start listening for auto start/ stop trip based on the flag ```enableAutoStartAndStop```. This flag is true by default. For this feature to work user should grand ```Always``` location access for the app.
+> ```configure()``` method will initialize sensor data capturing if the trip is already started. If trip is not started yet, then this method will start listening for auto start/ stop trip based on the flag ```enableAutoStartAndStop```. This flag is true by default. For this feature to work user should grand ```Always``` location access for the app.
 
 At this point you should be able to build the code without errors. Running the code will result in an ```assertionFailure``` with error ```Please add 'location' in required background modes```.
 
@@ -58,7 +65,7 @@ Builds and run the code. You are all done.
 
 Set ```enableAutoStartAndStop``` to false
 ```swift
-DriveAI.shared.enableAutoStartAndStop = false
+TangerineManager.shared.enableAutoStartAndStop = false
 ```
 ##### Manual Start/ Stop
 
@@ -88,8 +95,8 @@ locationAuthoriser.authoriseAppToUseLocation(progress: { (status, error) in
 
 Call startTrip function
 ```swift
-DriveAI.shared.startTrip { [weak self] (response, error) in
-    if let error = error, error != DriveAIError.tripAlreadyStarted {
+TangerineManager.shared.startTrip { [weak self] (response, error) in
+    if let error = error, error != TangerineError.tripAlreadyStarted {
 		print("error: \(error)")
     } else {
         // Do your configurations
@@ -102,7 +109,7 @@ DriveAI.shared.startTrip { [weak self] (response, error) in
 ###### Stop trip
 Call stopTrip function
 ```swift
-DriveAI.shared.stopTrip(completion: { (response, error) in
+TangerineManager.shared.stopTrip(completion: { (response, error) in
     if let error = error {
         print("error: \(error)")
     } else {                       	
@@ -121,7 +128,7 @@ DriveAI.shared.stopTrip(completion: { (response, error) in
         * (x: Double,y: Double, z: Double, dataObj: SensorData): x,y,z values of Acceleration and the value of all the sensors during the crash.
     * GPS crash: Crash was detected due to the change in the speed
         * (speedDifference: Double, dataObj: SensorData) : speed difference and the value of all the sensors during the crash.
-    > Rather than using the object returned along with Notification user can also get crash details as `DriveAI.shared.activeTripCrashInfo`. It will contain the location and time in which crash happened. If you think detected crash is a false positive then mark it as false positive by calling `DriveAI.shared.clearCrashInfo()`.
+    > Rather than using the object returned along with Notification user can also get crash details as `TangerineManager.shared.activeTripCrashInfo`. It will contain the location and time in which crash happened. If you think detected crash is a false positive then mark it as false positive by calling `TangerineManager.shared.clearCrashInfo()`.
 * `NotificationName.locationAccessPermissionChanged` when the location access permision changes
 * `NotificationName.locationDidUpdated` when the location get changed
 * `NotificationName.didChangeRegion` when the monitored region get changed
@@ -136,4 +143,4 @@ DriveAI.shared.stopTrip(completion: { (response, error) in
 
 ## Credits
 
-`Drive_AI` is brought to you by [XYZ](https://stackoverflow.com). If you're using `Drive_AI` in your project, attribution would be very appreciated.
+`Tangerine` is brought to you by [XYZ](https://stackoverflow.com). If you're using `Tangerine` in your project, attribution would be very appreciated.
