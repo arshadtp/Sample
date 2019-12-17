@@ -34,14 +34,18 @@ import Tangerine
 ```
 Register user and Configure Tangerine 
 ```swift
-TangerineManager.registerUser(withPhone:<PHONE NUMBER>completion: { (response, error) in
-            if let error = error {
-                print("\(error.localizedDescription)")
-                
-            } else {
-                TangerineManager.shared.configure()
-            }
-        })
+	if TangerineManager.isUserRegistered {
+            TangerineManager.shared.configure()
+        } else {
+		TangerineManager.registerUser(withPhone:<PHONE NUMBER>completion: { (response, error) in
+            		if let error = error {
+               			 print("\(error.localizedDescription)")
+            		} else {
+                		TangerineManager.shared.configure()
+            		}
+        	})
+	}
+
 ```
 > ```configure()``` method will initialize sensor data capturing if the trip is already started. If trip is not started yet, then this method will start listening for auto start/ stop trip based on the flag ```enableAutoStartAndStop```. This flag is true by default. For this feature to work user should grand ```Always``` location access for the app.
 
