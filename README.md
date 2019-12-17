@@ -10,12 +10,12 @@
 
 ### From CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like `Drive_AI` in your projects. First, add the following line to your [Podfile](http://guides.cocoapods.org/using/using-cocoapods.html):
+[CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like `Tangerine` in your projects. First, add the following line to your [Podfile](http://guides.cocoapods.org/using/using-cocoapods.html):
 
 ```ruby
-pod 'Drive_AI'
+pod 'Tangerine'
 ```
-Second, install `Drive_AI` into your project:
+Second, install `Tangerine` into your project:
 
 ```ruby
 pod install
@@ -25,16 +25,16 @@ pod install
 
 Configure API key in app's main plist.
 ```swift
-DriveAIAPIKey = <YOUR-API-KEY>
+TangerineAPIKey = <YOUR-API-KEY>
 ```
-#### Initialize Drive_AI
+#### Initialize Tangerine
 Import module
 ```swift
-import Drive_AI
+import Tangerine
 ```
-Configure Drive AI
+Configure Tangerine 
 ```swift
-DriveAI.shared.configure()
+TangerineManager.shared.configure()
 ```
 > This method will initialize sensor data capturing if the trip is already started. If trip is not started yet, then this method will start listening for auto start/ stop trip based on the flag ```enableAutoStartAndStop```. This flag is true by default. For this feature to work user should grand ```Always``` location access for the app.
 
@@ -46,8 +46,8 @@ Enable Location in Backround modes.
 Add code below code in ```application(_ application:, didFinishLaunchingWithOptions launchOptions:)```
 
 ```swift
-    if let optn = launchOptions, optn[UIApplicationLaunchOptionsKey.location] != nil {
-    	DriveAI.shared.configure()
+    if let optn = launchOptions, optn[UIApplication.LaunchOptionsKey.location] != nil {
+          TangerineManager.shared.configure()
     }
 ```
 > This is required to get the location updates when the system launches the app due to a location update.
